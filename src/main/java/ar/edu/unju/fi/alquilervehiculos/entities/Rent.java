@@ -1,6 +1,8 @@
 package ar.edu.unju.fi.alquilervehiculos.entities;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.Positive;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -28,18 +30,35 @@ public class Rent {
     @JoinColumn(name = "vehicle_id")
     private Vehicle vehicle;
 
-    @Column(name = "start_date")
+    @NotEmpty
+    @Column(nullable = false, name = "start_date")
     private LocalDate startDate;
 
-    @Column(name = "end_date")
+    @NotEmpty
+    @Column(nullable = false, name = "end_date")
     private LocalDate endDate;
 
-    @Column(name = "return_date")
+    @NotEmpty
+    @Column(nullable = false, name = "return_date")
     private LocalDate returnDate;
 
+    @NotEmpty
+    @Positive
+    @Column(nullable = false)
     private double price;
 
     @ManyToOne
     @JoinColumn(name = "state_rent_id")
     private StateRent stateRent;
+
+
+    public Rent(User user, Vehicle vehicle, LocalDate startDate, LocalDate endDate, LocalDate returnDate, double price, StateRent stateRent) {
+        this.user = user;
+        this.vehicle = vehicle;
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.returnDate = returnDate;
+        this.price = price;
+        this.stateRent = stateRent;
+    }
 }

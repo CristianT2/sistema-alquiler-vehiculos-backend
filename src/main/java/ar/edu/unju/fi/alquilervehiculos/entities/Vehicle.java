@@ -1,10 +1,15 @@
 package ar.edu.unju.fi.alquilervehiculos.entities;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Pattern;
+import jakarta.validation.constraints.Positive;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.validator.constraints.Length;
 
 @Entity
 @NoArgsConstructor
@@ -38,10 +43,27 @@ public class Vehicle {
     @JoinColumn(name = "state_id")
     private StateVehicle stateVehicle;
 
+    @NotEmpty
+    @Column(nullable = false)
     private int year;
+
+    @NotEmpty
+    @Column(nullable = false)
+    @Positive
     private double mileage;
+
+    @NotNull
+    @NotEmpty
+    @Pattern(regexp = "^[A-Z0-9]{6,7}$")
+    @Column(nullable = false, length = 6)
     private String tuition;
+
+    @NotEmpty
+    @Positive
+    @Column(nullable = false)
     private double price;
+
+    @Column(length = 100)
     private String description;
 
     @Lob

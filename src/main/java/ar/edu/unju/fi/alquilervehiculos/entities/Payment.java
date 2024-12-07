@@ -1,6 +1,8 @@
 package ar.edu.unju.fi.alquilervehiculos.entities;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Positive;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -32,7 +34,13 @@ public class Payment {
     @JoinColumn(name = "vehicle_id")
     private Vehicle vehicle;
 
+    @NotNull
+    @Column(nullable = false)
     private LocalDateTime date;
+
+    @NotNull
+    @Positive
+    @Column(nullable = false)
     private double amount;
 
     @ManyToOne
