@@ -25,18 +25,18 @@ public class Model {
     @NotEmpty
     @Length(min = 3, max = 20)
     @Column(nullable = false, length = 20)
-    private String nombre;
+    private String name;
 
     @Column(length = 100)
-    private String descripcion;
+    private String description;
 
     @ManyToOne
     @JoinColumn(name = "brand_id")
     private Brand brand;
 
-    public Model(String nombre, String descripcion, Brand brand) {
-        this.nombre = nombre;
-        this.descripcion = descripcion;
+    public Model(String name, String description, Brand brand) {
+        this.name = name;
+        this.description = description;
         this.brand = brand;
     }
 }
