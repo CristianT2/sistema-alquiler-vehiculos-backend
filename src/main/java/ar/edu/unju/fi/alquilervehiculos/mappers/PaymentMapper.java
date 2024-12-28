@@ -4,7 +4,9 @@ import ar.edu.unju.fi.alquilervehiculos.dto.PaymentDTO;
 import ar.edu.unju.fi.alquilervehiculos.entities.Payment;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.convention.MatchingStrategies;
+import org.springframework.stereotype.Component;
 
+@Component
 public class PaymentMapper {
     private ModelMapper modelMapper;
 

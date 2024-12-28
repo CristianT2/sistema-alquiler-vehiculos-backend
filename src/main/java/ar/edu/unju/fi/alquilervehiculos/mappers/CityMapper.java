@@ -4,7 +4,9 @@ import ar.edu.unju.fi.alquilervehiculos.dto.CityDTO;
 import ar.edu.unju.fi.alquilervehiculos.entities.City;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.convention.MatchingStrategies;
+import org.springframework.stereotype.Component;
 
+@Component
 public class CityMapper {
 
     private ModelMapper modelMapper;

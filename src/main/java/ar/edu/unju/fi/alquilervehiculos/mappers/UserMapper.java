@@ -4,7 +4,9 @@ import ar.edu.unju.fi.alquilervehiculos.dto.UserDTO;
 import ar.edu.unju.fi.alquilervehiculos.entities.User;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.convention.MatchingStrategies;
+import org.springframework.stereotype.Component;
 
+@Component
 public class UserMapper {
 
     private ModelMapper modelMapper;
