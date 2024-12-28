@@ -4,7 +4,9 @@ import ar.edu.unju.fi.alquilervehiculos.dto.BrandDTO;
 import ar.edu.unju.fi.alquilervehiculos.entities.Brand;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.convention.MatchingStrategies;
+import org.springframework.stereotype.Component;
 
+@Component
 public class BrandMapper {
 
     private ModelMapper modelMapper;

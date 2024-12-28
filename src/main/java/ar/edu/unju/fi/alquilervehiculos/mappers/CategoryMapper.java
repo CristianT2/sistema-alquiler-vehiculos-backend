@@ -4,7 +4,9 @@ import ar.edu.unju.fi.alquilervehiculos.dto.CategoryDTO;
 import ar.edu.unju.fi.alquilervehiculos.entities.Category;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.convention.MatchingStrategies;
+import org.springframework.stereotype.Component;
 
+@Component
 public class CategoryMapper {
 
     private ModelMapper modelMapper;

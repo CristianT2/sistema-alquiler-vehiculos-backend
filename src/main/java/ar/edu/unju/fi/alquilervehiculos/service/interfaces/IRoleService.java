@@ -4,10 +4,10 @@ import ar.edu.unju.fi.alquilervehiculos.dto.RoleDTO;
 
 import java.util.List;
 
-public interface IRoleSerice {
+public interface IRoleService {
 
-    RoleDTO createRole(RoleDTO role);
-    RoleDTO updateRole(Integer id, RoleDTO role);
+    RoleDTO createRole(RoleDTO roleDTO);
+    RoleDTO updateRole(Integer id, RoleDTO roleDTO);
     void deleteRole(Integer id);
     List<RoleDTO> getAllRoles();
     RoleDTO getRoleById(Integer id);

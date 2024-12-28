@@ -84,4 +84,100 @@ public class Vehicle {
         this.description = description;
         this.photo = photo;
     }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public Category getCategory() {
+        return category;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
+    }
+
+    public Brand getBrand() {
+        return brand;
+    }
+
+    public void setBrand(Brand brand) {
+        this.brand = brand;
+    }
+
+    public Model getModel() {
+        return model;
+    }
+
+    public void setModel(Model model) {
+        this.model = model;
+    }
+
+    public Color getColor() {
+        return color;
+    }
+
+    public void setColor(Color color) {
+        this.color = color;
+    }
+
+    public StateVehicle getStateVehicle() {
+        return stateVehicle;
+    }
+
+    public void setStateVehicle(StateVehicle stateVehicle) {
+        this.stateVehicle = stateVehicle;
+    }
+
+    public int getYear() {
+        return year;
+    }
+
+    public void setYear(int year) {
+        this.year = year;
+    }
+
+    public double getMileage() {
+        return mileage;
+    }
+
+    public void setMileage(double mileage) {
+        this.mileage = mileage;
+    }
+
+    public String getTuition() {
+        return tuition;
+    }
+
+    public void setTuition(String tuition) {
+        this.tuition = tuition;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public byte[] getPhoto() {
+        return photo;
+    }
+
+    public void setPhoto(byte[] photo) {
+        this.photo = photo;
+    }
 }
