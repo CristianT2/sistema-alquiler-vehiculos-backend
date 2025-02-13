@@ -2,10 +2,12 @@ package ar.edu.unju.fi.alquilervehiculos.service.implementations;
 
 import ar.edu.unju.fi.alquilervehiculos.dto.ModelDTO;
 import ar.edu.unju.fi.alquilervehiculos.entities.Brand;
+import ar.edu.unju.fi.alquilervehiculos.entities.Category;
 import ar.edu.unju.fi.alquilervehiculos.entities.Model;
 import ar.edu.unju.fi.alquilervehiculos.exceptions.CustomeException;
 import ar.edu.unju.fi.alquilervehiculos.mappers.ModeloMapper;
 import ar.edu.unju.fi.alquilervehiculos.repository.BrandRepository;
+import ar.edu.unju.fi.alquilervehiculos.repository.CategoryRepository;
 import ar.edu.unju.fi.alquilervehiculos.repository.ModelRepository;
 import ar.edu.unju.fi.alquilervehiculos.service.interfaces.IModelService;
 import jakarta.transaction.Transactional;
@@ -23,12 +25,14 @@ public class ModelServiceImp implements IModelService {
     private final ModelRepository modelRepository;
     private final ModeloMapper modeloMapper;
     private final BrandRepository brandRepository;
+    private final CategoryRepository categoryRepository;
 
     @Autowired
-    public ModelServiceImp(ModelRepository modelRepository, ModeloMapper modeloMapper, BrandRepository brandRepository) {
+    public ModelServiceImp(ModelRepository modelRepository, ModeloMapper modeloMapper, BrandRepository brandRepository, CategoryRepository categoryRepository) {
         this.modelRepository = modelRepository;
         this.modeloMapper = modeloMapper;
         this.brandRepository = brandRepository;
+        this.categoryRepository = categoryRepository;
     }
 
     /**
@@ -45,8 +49,10 @@ public class ModelServiceImp implements IModelService {
                 throw new CustomeException("El modelo ya existe");
             }
             Brand brand = brandRepository.findById(modelDTO.getBrand().getId()).orElseThrow(() -> new CustomeException("La marca no existe"));
+            //Category category = categoryRepository.findById(modelDTO.getCategory().getId()).orElseThrow(() -> new CustomeException("La categoria no existe"));
             Model model = modeloMapper.toEntity(modelDTO);
             model.setBrand(brand);
+            //model.setCategory(category);
 
             //log.info("Modelo creado correctamente");
             return modeloMapper.toDTO(modelRepository.save(model));
@@ -69,9 +75,11 @@ public class ModelServiceImp implements IModelService {
         try{
             Model model = modelRepository.findById(id).orElseThrow(() -> new CustomeException("El model no existe"));
             Brand brand = brandRepository.findById(modelDTO.getBrand().getId()).orElseThrow(() -> new CustomeException("La marca no existe"));
+            //Category category = categoryRepository.findById(modelDTO.getCategory().getId()).orElseThrow(() -> new CustomeException("La categoria no existe"));
 
             modeloMapper.toEntity(modelDTO);
             model.setBrand(brand);
+            //model.setCategory(category);
             model.setId(id);
 
             //log.info("Modelo actualizado correctamente");

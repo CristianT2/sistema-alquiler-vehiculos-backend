@@ -5,17 +5,12 @@ import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Positive;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import org.hibernate.validator.constraints.Length;
 
 @Entity
-@NoArgsConstructor
-@AllArgsConstructor
-@Getter
-@Setter
+//@NoArgsConstructor
+//@AllArgsConstructor
+//@Getter
+//@Setter
 @Table(name = "vehicles")
 public class Vehicle {
 
@@ -23,42 +18,42 @@ public class Vehicle {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "category_id")
     private Category category;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "brand_id")
     private Brand brand;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "model_id")
     private Model model;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "color_id")
     private Color color;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "state_id")
     private StateVehicle stateVehicle;
 
-    @NotEmpty
+    @NotNull
     @Column(nullable = false)
     private int year;
 
-    @NotEmpty
+    @NotNull
     @Column(nullable = false)
     @Positive
     private double mileage;
 
-    @NotNull
-    @NotEmpty
-    @Pattern(regexp = "^[A-Z0-9]{6,7}$")
-    @Column(nullable = false, length = 6)
-    private String tuition;
 
     @NotEmpty
+    @Pattern(regexp = "^[A-Z0-9]{6,7}$")
+    @Column(nullable = false)
+    private String tuition;
+
+    @NotNull
     @Positive
     @Column(nullable = false)
     private double price;
@@ -67,11 +62,14 @@ public class Vehicle {
     private String description;
 
     @Lob
-    @Column(name = "photo")
+    @Column(columnDefinition = "LONGBLOB")
     private byte[] photo;
 
+    public Vehicle() {
+    }
 
-    public Vehicle(Category category, Brand brand, Model model, Color color, StateVehicle stateVehicle, int year, double mileage, String tuition, double price, String description, byte[] photo) {
+    public Vehicle(Integer id, Category category, Brand brand, Model model, Color color, StateVehicle stateVehicle, int year, double mileage, String tuition, double price, String description, byte[] photo) {
+        this.id = id;
         this.category = category;
         this.brand = brand;
         this.model = model;

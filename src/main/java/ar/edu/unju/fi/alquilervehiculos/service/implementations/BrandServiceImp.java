@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 //@Slf4j
@@ -44,10 +45,7 @@ public class BrandServiceImp implements IBrandService {
             if (brandRepository.existsByName(brandDTO.getName())){
                 throw new CustomeException("La marca ya existe");
             }
-            Category category = categoryRepository.findById(brandDTO.getCategory().getId()).orElseThrow(() -> new CustomeException("No existe la categoria"));
             Brand brand = brandMapper.toEntity(brandDTO);
-            brand.setCategory(category);
-
             //log.info("Marca creada correctamente");
             return brandMapper.toDTO(brandRepository.save(brand));
         }catch (Exception e){
@@ -67,11 +65,12 @@ public class BrandServiceImp implements IBrandService {
     public BrandDTO updateBrand(Integer id, BrandDTO brandDTO) {
         //log.info("Actualizando marca con id: {}", id);
         try{
-            Brand brand = brandRepository.findById(id).orElseThrow(() -> new CustomeException("No existe la marca"));
-            Category category = categoryRepository.findById(brandDTO.getCategory().getId()).orElseThrow(() -> new CustomeException("No existe la categoria"));
-
-            brandMapper.toEntity(brandDTO);
-            brand.setCategory(category);
+            brandRepository.findById(id).orElseThrow(() -> new CustomeException("No existe la marca"));
+            //Category category = categoryRepository.findById(brandDTO.getCategory().getId()).orElseThrow(() -> new CustomeException("No existe la categoria"));
+            if (brandRepository.existsByNameAndIdNot(brandDTO.getName(), id)){
+                throw new CustomeException("La marca ya existe");
+            }
+            Brand brand = brandMapper.toEntity(brandDTO);
             brand.setId(id);
 
             //log.info("Marca actualizada correctamente");

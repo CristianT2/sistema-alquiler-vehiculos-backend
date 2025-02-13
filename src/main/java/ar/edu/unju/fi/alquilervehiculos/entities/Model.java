@@ -1,8 +1,8 @@
 package ar.edu.unju.fi.alquilervehiculos.entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -21,7 +21,6 @@ public class Model {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @NotNull
     @NotEmpty
     @Length(min = 3, max = 20)
     @Column(nullable = false, length = 20)
@@ -30,14 +29,18 @@ public class Model {
     @Column(length = 100)
     private String description;
 
-    @ManyToOne
+    @JsonBackReference
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "brand_id")
     private Brand brand;
 
-    public Model(String name, String description, Brand brand) {
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "category_id")
+    private Category category;
+
+    public Model(String name, String description) {
         this.name = name;
         this.description = description;
-        this.brand = brand;
     }
 
     public Integer getId() {
@@ -70,5 +73,13 @@ public class Model {
 
     public void setBrand(Brand brand) {
         this.brand = brand;
+    }
+
+    public Category getCategory() {
+        return category;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
     }
 }

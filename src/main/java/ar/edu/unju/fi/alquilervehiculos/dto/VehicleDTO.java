@@ -4,9 +4,9 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@NoArgsConstructor
-@AllArgsConstructor
-@Data
+//@NoArgsConstructor
+//@AllArgsConstructor
+//@Data
 public class VehicleDTO {
 
     private Integer id;
@@ -21,6 +21,24 @@ public class VehicleDTO {
     private double price;
     private String description;
     private byte[] photo;
+
+    public VehicleDTO() {
+    }
+
+    public VehicleDTO(Integer id, CategoryDTO category, BrandDTO brand, ModelDTO model, ColorDTO color, StateVehicleDTO stateVehicle, int year, double mileage, String tuition, double price, String description, byte[] photo) {
+        this.id = id;
+        this.category = category;
+        this.brand = brand;
+        this.model = model;
+        this.color = color;
+        this.stateVehicle = stateVehicle;
+        this.year = year;
+        this.mileage = mileage;
+        this.tuition = tuition;
+        this.price = price;
+        this.description = description;
+        this.photo = photo;
+    }
 
     public Integer getId() {
         return id;

@@ -51,9 +51,10 @@ public class VehicleServiceImp implements IVehicleService {
     public VehicleDTO createVehicle(VehicleDTO vehicleDTO) {
         //log.info("Creando un vehiculo");
         try{
-            Vehicle vehicle = validateAndMapVehicle(vehicleDTO);
+
+            //Vehicle vehicle = vehicleMapper.toEntity(vehicleDTO);
             //log.info("Vehiculo creado");
-            return vehicleMapper.toDTO(vehicleRepository.save(vehicle));
+            return vehicleMapper.toDTO(vehicleRepository.save(validateAndMapVehicle(vehicleDTO)));
         }catch (Exception e){
             //log.error("Error creando el vehiculo", e.getMessage());
             throw new CustomeException("Error creando el vehiculo");

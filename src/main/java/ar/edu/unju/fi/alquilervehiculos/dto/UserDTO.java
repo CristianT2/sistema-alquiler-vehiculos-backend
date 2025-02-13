@@ -4,8 +4,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@NoArgsConstructor
-@AllArgsConstructor
+//@NoArgsConstructor
+//@AllArgsConstructor
 @Data
 public class UserDTO {
 
@@ -21,6 +21,24 @@ public class UserDTO {
     private String address;
     private RoleDTO role;
     private byte[] photo;
+
+    public UserDTO() {
+    }
+
+    public UserDTO(Integer id, String username, String password, String name, String lastname, String dni, String email, String phoneNumber, CityDTO city, String address, RoleDTO role, byte[] photo) {
+        this.id = id;
+        this.username = username;
+        this.password = password;
+        this.name = name;
+        this.lastname = lastname;
+        this.dni = dni;
+        this.email = email;
+        this.phoneNumber = phoneNumber;
+        this.city = city;
+        this.address = address;
+        this.role = role;
+        this.photo = photo;
+    }
 
     public Integer getId() {
         return id;

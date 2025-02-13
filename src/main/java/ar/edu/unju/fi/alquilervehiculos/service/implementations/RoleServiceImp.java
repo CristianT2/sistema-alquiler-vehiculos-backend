@@ -37,7 +37,7 @@ public class RoleServiceImp implements IRoleService {
     public RoleDTO createRole(RoleDTO roleDTO) {
         //log.info("creando un rol: {}", roleDTO);
         try{
-            if (roleRepository.existsByName(roleDTO.getName())){
+            if(roleRepository.existsByName(roleDTO.getName())) {
                 throw new CustomeException("El rol ya existe");
             }
             Role role = roleMapper.toEntity(roleDTO);

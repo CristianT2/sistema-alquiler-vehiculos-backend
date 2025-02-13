@@ -4,13 +4,19 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@NoArgsConstructor
-@AllArgsConstructor
 @Data
 public class RoleDTO {
 
     private Integer id;
     private String name;
+
+    public RoleDTO(){
+    }
+
+    public RoleDTO(Integer id, String name) {
+        this.id = id;
+        this.name = name;
+    }
 
     public Integer getId() {
         return id;

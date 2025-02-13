@@ -27,10 +27,10 @@ public class CategoryMapper {
 
     /**
      * Convierte un objeto CategoryDTO a un objeto Category
-     * @param dto
+     * @param categoryDTO
      * @return
      */
-    public Category toEntity(CategoryDTO dto){
-        return modelMapper.map(dto, Category.class);
+    public Category toEntity(CategoryDTO categoryDTO){
+        return modelMapper.map(categoryDTO, Category.class);
     }
 }

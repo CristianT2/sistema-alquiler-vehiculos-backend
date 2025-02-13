@@ -74,11 +74,12 @@ public class UserServiceImp implements IUserService {
             throw new CustomeException("ID de usuario inválido");
         }
         try{
-            User user = userRepository.findById(id).orElseThrow(() -> new CustomeException("Usuario no encontrado"));
+            userRepository.findById(id).orElseThrow(() -> new CustomeException("Usuario no encontrado"));
             City city = cityRepository.findById(userDTO.getCity().getId()).orElseThrow(() -> new CustomeException("Ciudad no encontrada"));
             Role role = roleRepository.findById(userDTO.getRole().getId()).orElseThrow(() -> new CustomeException("Rol no encontrada"));
 
-            userMapper.toEntity(userDTO);
+            User user;
+            user = userMapper.toEntity(userDTO);
             user.setCity(city);
             user.setRole(role);
             user.setId(id);
