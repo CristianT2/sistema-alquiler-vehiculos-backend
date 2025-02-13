@@ -3,6 +3,7 @@ package ar.edu.unju.fi.alquilervehiculos.controller;
 import ar.edu.unju.fi.alquilervehiculos.dto.UserDTO;
 import ar.edu.unju.fi.alquilervehiculos.exceptions.CustomeException;
 import ar.edu.unju.fi.alquilervehiculos.service.interfaces.IUserService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -23,7 +24,7 @@ public class UserController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public ResponseEntity<UserDTO> createUser(@RequestBody UserDTO userDTO) {
+    public ResponseEntity<UserDTO> createUser(@Valid @RequestBody UserDTO userDTO) {
         try{
             return ResponseEntity.ok(userService.createUser(userDTO));
         } catch(Exception e){
@@ -32,7 +33,7 @@ public class UserController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<UserDTO> updateUser(@PathVariable Integer id, @RequestBody UserDTO userDTO) {
+    public ResponseEntity<UserDTO> updateUser(@PathVariable Integer id, @Valid @RequestBody UserDTO userDTO) {
         try{
             return ResponseEntity.ok(userService.updateUser(id, userDTO));
         } catch(Exception e){

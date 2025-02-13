@@ -1,11 +1,15 @@
 package ar.edu.unju.fi.alquilervehiculos.dto;
 
+import com.fasterxml.jackson.annotation.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@NoArgsConstructor
-@AllArgsConstructor
+import java.util.List;
+import java.util.Set;
+
+//@NoArgsConstructor
+//@AllArgsConstructor
 @Data
 public class BrandDTO {
 
@@ -13,7 +17,16 @@ public class BrandDTO {
     private String name;
     private String description;
     private byte[] image;
-    private CategoryDTO category;
+
+    public BrandDTO() {
+    }
+
+    public BrandDTO(Integer id, String name, String description, byte[] image) {
+        this.id = id;
+        this.name = name;
+        this.description = description;
+        this.image = image;
+    }
 
     public Integer getId() {
         return id;
@@ -45,13 +58,5 @@ public class BrandDTO {
 
     public void setImage(byte[] image) {
         this.image = image;
-    }
-
-    public CategoryDTO getCategory() {
-        return category;
-    }
-
-    public void setCategory(CategoryDTO category) {
-        this.category = category;
     }
 }

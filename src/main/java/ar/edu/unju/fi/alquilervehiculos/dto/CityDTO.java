@@ -4,14 +4,23 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@NoArgsConstructor
-@AllArgsConstructor
+//@NoArgsConstructor
+//@AllArgsConstructor
 @Data
 public class CityDTO {
 
     private Integer id;
     private String name;
     private String postalCode;
+
+    public CityDTO(){}
+
+    public CityDTO(Integer id, String name, String postalCode) {
+        this.id = id;
+        this.name = name;
+        this.postalCode = postalCode;
+    }
+
 
     public Integer getId() {
         return id;

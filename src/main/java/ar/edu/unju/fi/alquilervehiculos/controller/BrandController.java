@@ -3,6 +3,7 @@ package ar.edu.unju.fi.alquilervehiculos.controller;
 import ar.edu.unju.fi.alquilervehiculos.dto.BrandDTO;
 import ar.edu.unju.fi.alquilervehiculos.exceptions.CustomeException;
 import ar.edu.unju.fi.alquilervehiculos.service.interfaces.IBrandService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -23,7 +24,7 @@ public class BrandController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public ResponseEntity<BrandDTO> createBrand(@RequestBody BrandDTO brandDTO) {
+    public ResponseEntity<BrandDTO> createBrand(@Valid @RequestBody BrandDTO brandDTO) {
         try{
             return ResponseEntity.ok(brandService.createBrand(brandDTO));
         } catch(Exception e){
@@ -32,7 +33,7 @@ public class BrandController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<BrandDTO> updateBrand(@PathVariable Integer id, @RequestBody BrandDTO brandDTO) {
+    public ResponseEntity<BrandDTO> updateBrand(@PathVariable Integer id, @Valid @RequestBody BrandDTO brandDTO) {
         try{
             return ResponseEntity.ok(brandService.updateBrand(id, brandDTO));
         } catch(Exception e){

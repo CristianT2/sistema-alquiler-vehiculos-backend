@@ -3,6 +3,7 @@ package ar.edu.unju.fi.alquilervehiculos.controller;
 import ar.edu.unju.fi.alquilervehiculos.dto.RoleDTO;
 import ar.edu.unju.fi.alquilervehiculos.exceptions.CustomeException;
 import ar.edu.unju.fi.alquilervehiculos.service.interfaces.IRoleService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -23,7 +24,7 @@ public class RoleController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public ResponseEntity<RoleDTO> createRole(@RequestBody RoleDTO roleDTO) {
+    public ResponseEntity<RoleDTO> createRole(@Valid @RequestBody RoleDTO roleDTO) {
         try{
             return ResponseEntity.ok(roleService.createRole(roleDTO));
         }catch (Exception e){
@@ -32,7 +33,7 @@ public class RoleController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<RoleDTO> updateRole(@PathVariable Integer id, @RequestBody RoleDTO roleDTO) {
+    public ResponseEntity<RoleDTO> updateRole(@PathVariable Integer id, @Valid @RequestBody RoleDTO roleDTO) {
         try{
             return ResponseEntity.ok(roleService.updateRole(id, roleDTO));
         }catch (Exception e){

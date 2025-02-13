@@ -62,6 +62,9 @@ public class CategoryServiceImp implements ICategoryService {
         //log.info("Actualizando categoria con id: {}", id);
         try{
             categoryRepository.findById(id).orElseThrow(() -> new CustomeException("La categoria no existe"));
+            if (categoryRepository.existsByNameAndIdNot(categoryDTO.getName(), id)){
+                throw new CustomeException("La categoria ya existe");
+            }
             Category category = categoryMapper.toEntity(categoryDTO);
             category.setId(id);
 

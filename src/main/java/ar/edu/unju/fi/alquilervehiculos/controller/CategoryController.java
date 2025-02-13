@@ -3,6 +3,7 @@ package ar.edu.unju.fi.alquilervehiculos.controller;
 import ar.edu.unju.fi.alquilervehiculos.dto.CategoryDTO;
 import ar.edu.unju.fi.alquilervehiculos.exceptions.CustomeException;
 import ar.edu.unju.fi.alquilervehiculos.service.interfaces.ICategoryService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -23,7 +24,7 @@ public class CategoryController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public ResponseEntity<CategoryDTO> createCategory(@RequestBody CategoryDTO categoryDTO) {
+    public ResponseEntity<CategoryDTO> createCategory(@Valid @RequestBody CategoryDTO categoryDTO) {
         try{
             return ResponseEntity.ok(categoryService.createCategory(categoryDTO));
         } catch(Exception e){
@@ -32,7 +33,7 @@ public class CategoryController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<CategoryDTO> updateCategory(@PathVariable Integer id, @RequestBody CategoryDTO categoryDTO) {
+    public ResponseEntity<CategoryDTO> updateCategory(@PathVariable Integer id, @Valid @RequestBody CategoryDTO categoryDTO) {
         try{
             return ResponseEntity.ok(categoryService.updateCategory(id, categoryDTO));
         } catch(Exception e){

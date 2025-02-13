@@ -1,17 +1,29 @@
 package ar.edu.unju.fi.alquilervehiculos.dto;
 
+import com.fasterxml.jackson.annotation.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@NoArgsConstructor
-@AllArgsConstructor
+import java.util.List;
+import java.util.Set;
+
+//@NoArgsConstructor
+//@AllArgsConstructor
 @Data
 public class CategoryDTO {
 
     private Integer id;
     private String name;
     private String description;
+
+    public CategoryDTO(){}
+
+    public CategoryDTO(Integer id, String name, String description) {
+        this.id = id;
+        this.name = name;
+        this.description = description;
+    }
 
     public Integer getId() {
         return id;

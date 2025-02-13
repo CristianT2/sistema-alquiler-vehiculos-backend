@@ -6,6 +6,7 @@ import ar.edu.unju.fi.alquilervehiculos.exceptions.CustomeException;
 import ar.edu.unju.fi.alquilervehiculos.mappers.CityMapper;
 import ar.edu.unju.fi.alquilervehiculos.repository.CityRepository;
 import ar.edu.unju.fi.alquilervehiculos.service.interfaces.ICityService;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -29,10 +30,11 @@ public class CityServiceImp implements ICityService {
      * @param cityDTO 
      * @return
      */
+    @Transactional
     @Override
     public CityDTO createCity(CityDTO cityDTO) {
         try{
-            if(cityRepository.existsByName(cityDTO.getName())){
+            if(cityRepository.existsByPostalCode(cityDTO.getPostalCode())){
                 throw new CustomeException("La ciudad ya existe");
             }
             City city = cityMapper.toEntity(cityDTO);
@@ -48,11 +50,15 @@ public class CityServiceImp implements ICityService {
      * @param cityDTO
      * @return
      */
+    @Transactional
     @Override
     public CityDTO updateCity(Integer id, CityDTO cityDTO) {
         try{
-            City city = cityRepository.findById(id).orElseThrow(() -> new CustomeException("La ciudad no existe"));
-            cityMapper.toEntity(cityDTO);
+            cityRepository.findById(id).orElseThrow(() -> new CustomeException("La ciudad no existe"));
+            if (cityRepository.existsByPostalCodeAndIdNot(cityDTO.getPostalCode(), id)){
+                throw new CustomeException("La ciudad ya existe");
+            }
+            City city = cityMapper.toEntity(cityDTO);
             city.setId(id);
             return cityMapper.toDTO(cityRepository.save(city));
         }catch (Exception e){
@@ -64,6 +70,7 @@ public class CityServiceImp implements ICityService {
      * Elimina una ciudad
      * @param id 
      */
+    @Transactional
     @Override
     public void deleteCity(Integer id) {
         try{

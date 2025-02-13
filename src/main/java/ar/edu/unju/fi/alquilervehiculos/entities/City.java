@@ -1,5 +1,6 @@
 package ar.edu.unju.fi.alquilervehiculos.entities;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
@@ -12,7 +13,6 @@ import org.hibernate.validator.constraints.Length;
 import java.util.List;
 
 @Entity
-@NoArgsConstructor
 @AllArgsConstructor
 @Getter
 @Setter
@@ -23,22 +23,24 @@ public class City {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @NotNull
     @NotEmpty
-    @Length(min = 3, max = 20)
-    @Column(nullable = false, length = 20)
+    @Length(min = 3, max = 50)
+    @Column(nullable = false, length = 50)
     private String name;
 
-    @NotNull
     @NotEmpty
     @Length(min = 3, max = 20)
     @Column(nullable = false, length = 20, name = "postal_code")
     private String postalCode;
 
+    @JsonManagedReference
     @OneToMany(mappedBy = "city")
     private List<User> users;
 
-    public City(String name, String postalCode) {
+    public City(){}
+
+    public City(Integer id, String name, String postalCode) {
+        this.id = id;
         this.name = name;
         this.postalCode = postalCode;
     }

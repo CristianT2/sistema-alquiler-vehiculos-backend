@@ -1,19 +1,15 @@
 package ar.edu.unju.fi.alquilervehiculos.entities;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.NotNull;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.validator.constraints.Length;
 
 import java.util.List;
 
 @Entity
-@NoArgsConstructor
-@AllArgsConstructor
 @Getter
 @Setter
 @Table(name = "roles")
@@ -23,16 +19,20 @@ public class Role {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @NotNull
     @NotEmpty
-    @Length(min = 3, max = 20)
-    @Column(nullable = false, length = 20)
+    @Length(min = 3, max = 40)
+    @Column(nullable = false, length = 40)
     private String name;
 
+    @JsonManagedReference
     @OneToMany(mappedBy = "role")
     private List<User> users;
 
-    public Role(String name) {
+    public Role(){
+    }
+
+    public Role(Integer id, String name) {
+        this.id = id;
         this.name = name;
     }
 

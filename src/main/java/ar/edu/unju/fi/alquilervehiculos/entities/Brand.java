@@ -1,19 +1,19 @@
 package ar.edu.unju.fi.alquilervehiculos.entities;
 
+
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.validator.constraints.Length;
 
 import java.util.List;
+import java.util.Set;
 
 @Entity
-@NoArgsConstructor
-@AllArgsConstructor
+//@NoArgsConstructor
+//@AllArgsConstructor
 @Getter
 @Setter
 @Table(name = "brands")
@@ -23,7 +23,6 @@ public class Brand {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @NotNull
     @NotEmpty
     @Length(min = 3, max = 20)
     @Column(nullable = false, length = 20)
@@ -33,15 +32,33 @@ public class Brand {
     private String description;
 
     @Lob
-    @Column(name = "image")
+    @Column(columnDefinition = "LONGBLOB")
     private byte[] image;
 
-    @ManyToOne
-    @JoinColumn(name = "category_id")
-    private Category category;
+    @ManyToMany(cascade = {
+            CascadeType.PERSIST,
+            CascadeType.MERGE
+    })
+    @JoinTable(
+            name = "brand_category",
+            joinColumns = {@JoinColumn(name = "brand_id")},
+            inverseJoinColumns = {@JoinColumn(name = "category_id")}
+    )
+    private Set<Category> categories;
 
-    @OneToMany(mappedBy = "brand")
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true, mappedBy = "brand")
     private List<Model> models;
+
+
+    public Brand() {
+    }
+
+    public Brand(Integer id, String name, String description, byte[] image) {
+        this.id = id;
+        this.name = name;
+        this.description = description;
+        this.image = image;
+    }
 
     public Integer getId() {
         return id;
@@ -71,16 +88,16 @@ public class Brand {
         return image;
     }
 
+    public Set<Category> getCategories() {
+        return categories;
+    }
+
+    public void setCategories(Set<Category> categories) {
+        this.categories = categories;
+    }
+
     public void setImage(byte[] image) {
         this.image = image;
-    }
-
-    public Category getCategory() {
-        return category;
-    }
-
-    public void setCategory(Category category) {
-        this.category = category;
     }
 
     public List<Model> getModels() {
