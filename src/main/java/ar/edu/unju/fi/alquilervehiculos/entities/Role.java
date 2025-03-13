@@ -3,6 +3,7 @@ package ar.edu.unju.fi.alquilervehiculos.entities;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.validator.constraints.Length;
@@ -12,6 +13,7 @@ import java.util.List;
 @Entity
 @Getter
 @Setter
+@Builder
 @Table(name = "roles")
 public class Role {
 
@@ -34,6 +36,12 @@ public class Role {
     public Role(Integer id, String name) {
         this.id = id;
         this.name = name;
+    }
+
+    public Role(Integer id, String name, List<User> users) {
+        this.id = id;
+        this.name = name;
+        this.users = users;
     }
 
     public Integer getId() {
