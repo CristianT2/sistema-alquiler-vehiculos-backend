@@ -3,6 +3,7 @@ package ar.edu.unju.fi.alquilervehiculos.entities;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.validator.constraints.Length;
@@ -12,6 +13,7 @@ import org.hibernate.validator.constraints.Length;
 //@AllArgsConstructor
 @Getter
 @Setter
+@Builder
 @Table(name = "users")
 public class User {
 
@@ -25,7 +27,7 @@ public class User {
     private String username;
 
     @NotEmpty
-    @Length(min = 3, max = 20)
+    @Length(min = 3, max = 255)
     @Column(nullable = false, length = 20)
     private String password;
 
